@@ -1,0 +1,21 @@
+{
+  "name": "master",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/scriptjs": "0.0.2",
+    "tslib": "^1.9.3",
+    "typescript": "^3.1.6",
+    "scriptjs": "^2.5.9"
+  },
+  "peerDependencies": {
+    "scriptjs": "^2.5.9"
+  }
+}

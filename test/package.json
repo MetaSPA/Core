@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve:static": "node_modules/.bin/http-server ./src/test -p 8081",
+    "serve:static": "node_modules/.bin/http-server ./static -p 8081",
     "serve": "webpack-dev-server --config=webpack.config.js --display=verbose --color --progress --profile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

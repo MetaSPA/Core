@@ -7,7 +7,7 @@ const timeStamp = new Date().getTime();
 
 module.exports = {
     entry: {
-        bundle: "./test/index.tsx",
+        bundle: "./index.tsx",
     },
     output: {
         pathinfo: true,
@@ -90,7 +90,7 @@ module.exports = {
     plugins: [
         new HTMLPlugin({
             title: "test",
-            template: path.resolve(__dirname, "src/test/index.ejs"),
+            template: path.resolve(__dirname, "src/index.ejs"),
         }),
         // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         /* new OfflinePlugin({

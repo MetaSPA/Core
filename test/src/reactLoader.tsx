@@ -1,8 +1,8 @@
 import { Component, h } from "preact";
-import { metaSPA } from "../core";
+import { metaSPA } from "../../core/dist";
 
 interface IReactLoaderProps {
-    id: string
+    id: string;
 }
 
 class ReactLoader extends Component<IReactLoaderProps, any> {
