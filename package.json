@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "serve:static": "node_modules/.bin/http-server ./src/test -p 8081",
-    "serve": "webpack-dev-server --config=webpack.config.js --display=verbose --color --progress --profile --hot",
+    "serve": "webpack-dev-server --config=webpack.config.js --display=verbose --color --progress --profile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/systemjs": "^0.20.6",
+    "preact": "^8.3.1",
+    "preact-router": "^2.6.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "scriptjs": "^2.5.9",
@@ -23,7 +25,6 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
-    "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
     "@types/scriptjs": "0.0.2",
     "babel-loader": "^8.0.4",

@@ -118,11 +118,8 @@ module.exports = {
     optimization: {
         splitChunks: {
             chunks: "async",
-            minSize: 300,
-            maxSize: 0,
+            minSize: 0,
             minChunks: 1,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
             automaticNameDelimiter: "~",
             name: true,
             cacheGroups: {
@@ -132,8 +129,13 @@ module.exports = {
                     chunks: "all",
                 },
                 commons: {
-                    test: /[\\/]node_modules[\\/](react)[\\/]/,
+                    test: /[\\/]node_modules[\\/](react|react-dom)[\\/]./,
                     name: "react",
+                    chunks: "all",
+                },
+                commons: {
+                    test: /[\\/]node_modules[\\/](@babel|core-js)[\\/]./,
+                    name: "polyfill",
                     chunks: "all",
                 },
             },

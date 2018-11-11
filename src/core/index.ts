@@ -10,14 +10,15 @@ interface IMetaRegistration {
         module: () => any;
     }>;
     onLoad: (module: any, context: MetaSPACore) => any;
+    unMount: (module: any, context: MetaSPACore) => any;
 }
 
 class MetaSPACore {
     static metaSPAProvider: IMetaSPAProvider = {} as IMetaSPAProvider;
     static registeredModules: { [x: string]: any } = {};
-    static metaSPALoad = (config: {
-        namespace: string;
-    }) => async (module: any) => {
+    static metaSPALoad = (config: { namespace: string }) => async (
+        module: any,
+    ) => {
         MetaSPACore.registeredModules[config.namespace] = module;
     };
     static getInstance = () => {
@@ -46,17 +47,38 @@ class MetaSPACore {
         const context = this;
         const module = this.registrations.get(namespace);
         if (module) {
-            const promises = module.providers.map(async p => {
-                MetaSPACore.metaSPAProvider[p.symbol] = await p.module();
-            });
-            await Promise.all(promises);
-            scriptjs("/public/bundle.js", () => {
-                module.onLoad(MetaSPACore.registeredModules[namespace], context);
-            });
+            if (MetaSPACore.registeredModules[namespace]) {
+                module.onLoad(MetaSPACore.registeredModules[namespace], this);
+                return;
+            } else {
+                const promises = module.providers.map(async p => {
+                    MetaSPACore.metaSPAProvider[p.symbol] = await p.module();
+                });
+                await Promise.all(promises);
+                scriptjs("/public/bundle.js", () => {
+                    module.onLoad(
+                        MetaSPACore.registeredModules[namespace],
+                        context,
+                    );
+                });
+            }
         }
     }
     public loadModule(namespace: string) {
         this._loadModuleAsync(namespace);
+        return this;
+    }
+    private async _unMountModuleAsync(namespace: string) {
+        const module = this.registrations.get(namespace);
+        if (module) {
+            await module.unMount(
+                MetaSPACore.registeredModules[namespace],
+                this,
+            );
+        }
+    }
+    public unMountModule(namespace: string) {
+        this._unMountModuleAsync(namespace);
         return this;
     }
 }

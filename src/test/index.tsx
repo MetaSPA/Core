@@ -1,19 +1,21 @@
 import "@babel/polyfill";
-import { metaSPA } from "../index";
+import { h, Component, render } from "preact";
+import { Router, route } from "preact-router";
+import ReactLoader from "./reactLoader";
 
-metaSPA
-    .register({
-        namespace: "TestReact",
-        entry: "/public/bundle.js",
-        providers: [
-            { symbol: "React", module: () => import("react") },
-            { symbol: "ReactDOM", module: () => import("react-dom") },
-        ],
-        onLoad: (module, context) => {
-            const Root = module.default;
-            const React = context.providers.React;
-            const ReactDOM = context.providers.ReactDOM;
-            ReactDOM.render(<Root />, document.getElementById("root"));
-        },
-    })
-    .loadModule("TestReact");
+class App extends Component {
+    render() {
+        return (
+            <div>
+                <button onClick={() => route("/angular")}>To Angular</button>
+                <button onClick={() => route("/")}>To React</button>
+                <Router>
+                    <div path="/angular">Angular</div>
+                    <ReactLoader id="react" path="/" />
+                </Router>
+            </div>
+        );
+    }
+}
+
+render(<App />, document.getElementById("root")!);
