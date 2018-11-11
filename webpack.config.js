@@ -86,15 +86,6 @@ module.exports = {
                 changeOrigin: true,
             },
         },
-        // proxy: {
-        //     "/api": {
-        //         // target: 'https://yapi.advai.net/mock/198/',
-        //         target: "https://eboss.kreditpintar.net/",
-        //         changeOrigin: true,
-        //         secure: false,
-        //         xfwd: false,
-        //     },
-        // },
     },
     plugins: [
         new HTMLPlugin({
