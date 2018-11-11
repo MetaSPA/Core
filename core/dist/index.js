@@ -52,7 +52,7 @@ var MetaSPACore = /** @class */ (function () {
                         return [4 /*yield*/, Promise.all(promises)];
                     case 2:
                         _a.sent();
-                        scriptjs_1.default("/public/bundle.js", function () {
+                        scriptjs_1.default(module.entry, function () {
                             module.onLoad(MetaSPACore.getInstance().registeredModules[namespace], _this);
                         });
                         _a.label = 3;

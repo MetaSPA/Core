@@ -61,7 +61,7 @@ class MetaSPACore<P extends { [x: string]: any }> {
                     ] = await p.module();
                 });
                 await Promise.all(promises);
-                scriptjs("/public/bundle.js", () => {
+                scriptjs(module.entry, () => {
                     module.onLoad(
                         MetaSPACore.getInstance().registeredModules[namespace],
                         this,
