@@ -89,10 +89,6 @@ module.exports = {
                 target: "http://127.0.0.1:8081/",
                 changeOrigin: true,
             },
-            "/vuepublic": {
-                target: "http://127.0.0.1:8081/",
-                changeOrigin: true,
-            },
             "/vue2public": {
                 target: "http://127.0.0.1:8081/",
                 changeOrigin: true,
