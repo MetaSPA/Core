@@ -14,7 +14,7 @@ class ReactLoader extends Component<IReactLoaderProps, any> {
                 entry: "/public/bundle.js",
                 providers: [
                     { symbol: "React", module: () => import("react" as any) },
-                    { symbol: "ReactDOM", module: () => import("react-dom") },
+                    { symbol: "ReactDOM", module: () => import("react-dom" as any) },
                 ],
                 onLoad: (module, context) => {
                     const Root = module.default;

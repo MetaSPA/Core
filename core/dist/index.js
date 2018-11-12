@@ -3,9 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var scriptjs_1 = tslib_1.__importDefault(require("scriptjs"));
 var MetaSPA = tslib_1.__importStar(require("./index"));
+var history_1 = require("history");
 var MetaSPACore = /** @class */ (function () {
     function MetaSPACore() {
         var _this = this;
+        this.history = history_1.createBrowserHistory();
         this.providers = {};
         this.registeredModules = {};
         this.metaSPALoad = function (config) { return function (module) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
@@ -91,6 +93,7 @@ var MetaSPACore = /** @class */ (function () {
             window.metaSPA = new MetaSPACore();
             window.metaSPALoad = window.metaSPA.metaSPALoad;
             window.metaSPAProvider = window.metaSPA.providers;
+            window.metaSPAHistory = window.metaSPA.history;
         }
         return window.metaSPA;
     };
@@ -98,5 +101,7 @@ var MetaSPACore = /** @class */ (function () {
 }());
 var metaSPA = MetaSPACore.getInstance();
 exports.metaSPA = metaSPA;
+var history = metaSPA.history;
+exports.history = history;
 exports.default = MetaSPACore;
 //# sourceMappingURL=index.js.map

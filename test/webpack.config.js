@@ -53,6 +53,10 @@ module.exports = {
     resolve: {
         modules: [path.resolve(__dirname, "src"), "node_modules"],
         extensions: [".ts", ".tsx", ".js"],
+        alias: {
+            'react': 'preact-compat',
+            'react-dom': 'preact-compat'
+        }
     },
     devServer: {
         host: "0.0.0.0",
@@ -86,6 +90,10 @@ module.exports = {
                 changeOrigin: true,
             },
             "/vuepublic": {
+                target: "http://127.0.0.1:8081/",
+                changeOrigin: true,
+            },
+            "/vue2public": {
                 target: "http://127.0.0.1:8081/",
                 changeOrigin: true,
             }

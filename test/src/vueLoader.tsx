@@ -8,13 +8,16 @@ class VueLoader extends Component<{}, any> {
         metaSPA
             .register({
                 namespace: "TestVue",
-                entry: "/vuepublic/testvue.common.js",
+                // entry: "/vuepublic/testvue.common.js",
+                entry: '/vue2public/app.js',
                 providers: [{ symbol: "Vue", module: () => import("vue") }],
                 onLoad: (module, context) => {
-                    const Root = module;
+                    const {App, router, store} = module;
                     const Vue = context.providers.Vue!.default;
                     this.child = new Vue({
-                        render: (h: any) => h(Root),
+                        router,
+                        store,
+                        render: (h: any) => h(App),
                     }).$mount()
                     this.ref!.appendChild(this.child.$el)
                 },

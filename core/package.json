@@ -11,11 +11,15 @@
   "license": "ISC",
   "devDependencies": {
     "@types/scriptjs": "0.0.2",
+    "scriptjs": "^2.5.9",
     "tslib": "^1.9.3",
     "typescript": "^3.1.6",
-    "scriptjs": "^2.5.9"
+    "history": "^4.7.2",
+    "@types/history": "^4.7.2"
   },
   "peerDependencies": {
-    "scriptjs": "^2.5.9"
+    "scriptjs": "^2.5.9",
+    "history": "^4.7.2",
+    "@types/history": "^4.7.2"
   }
 }

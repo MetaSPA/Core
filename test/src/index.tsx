@@ -1,20 +1,25 @@
 import "@babel/polyfill";
-import { h, Component, render } from "preact";
-import { Router, route } from "preact-router";
+import { history } from "../../core/dist";
+import { Component, h, render } from "preact";
 import ReactLoader from "./reactLoader";
 import VueLoader from "./vueLoader";
-import Redirect from "redirect";
+import { Route, Router, Switch, Redirect } from "./router";
 
 class App extends Component {
     render() {
         return (
             <div>
-                <button onClick={() => route("/react")}>To React</button>
-                <button onClick={() => route("/vue")}>To Vue</button>
-                <Router>
-                    <VueLoader path="/vue" />
-                    <ReactLoader id="react" path="/react" />
-                    <Redirect path="/" to="/vue" />
+                <button onClick={() => history.push("/react")}>To React</button>
+                <button onClick={() => history.push("/vue2")}>To Vue</button>
+                <Router history={history}>
+                    <Switch>
+                        <Route path="/vue2" component={VueLoader} />
+                        <Route path="/react" component={ReactLoader} />
+                        <Route
+                            path="/"
+                            render={() => <Redirect to="/react" />}
+                        />
+                    </Switch>
                 </Router>
             </div>
         );

@@ -1,5 +1,6 @@
 import scriptjs from "scriptjs";
 import * as MetaSPA from "./index";
+import { createBrowserHistory, History } from "history";
 
 type IMetaSPAProvider<P extends { [x: string]: any }> = {
     [K in keyof P]?: P[K]
@@ -28,9 +29,11 @@ class MetaSPACore<P extends { [x: string]: any }> {
             window.metaSPA = new MetaSPACore();
             window.metaSPALoad = window.metaSPA.metaSPALoad;
             window.metaSPAProvider = window.metaSPA.providers;
+            window.metaSPAHistory = window.metaSPA.history;
         }
         return window.metaSPA;
     };
+    public history = createBrowserHistory();
     public providers: IMetaSPAProvider<P> = {} as IMetaSPAProvider<P>;
     public registeredModules: { [x: string]: any } = {};
     public metaSPALoad: IMetaSPALoadFunction = config => async module => {
@@ -94,10 +97,11 @@ declare global {
         metaSPA: MetaSPACore<any>;
         metaSPALoad: IMetaSPALoadFunction;
         metaSPAProvider: IMetaSPAProvider<any>;
+        metaSPAHistory: History<any>;
     }
 }
 
 const metaSPA = MetaSPACore.getInstance();
-
+const history = metaSPA.history;
 export default MetaSPACore;
-export { metaSPA };
+export { metaSPA, history };
