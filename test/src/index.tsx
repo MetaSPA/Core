@@ -1,9 +1,11 @@
 import "@babel/polyfill";
-import { history } from "../../core/dist";
+import { createBrowserHistory } from "history";
 import { Component, h, render } from "preact";
 import ReactLoader from "./reactLoader";
 import VueLoader from "./vueLoader";
 import { Route, Router, Switch, Redirect } from "./router";
+
+const history = createBrowserHistory();
 
 class App extends Component {
     render() {

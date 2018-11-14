@@ -3,16 +3,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var scriptjs_1 = tslib_1.__importDefault(require("scriptjs"));
 var MetaSPA = tslib_1.__importStar(require("./index"));
-var history_1 = require("history");
 var MetaSPACore = /** @class */ (function () {
     function MetaSPACore() {
         var _this = this;
-        this.history = history_1.createBrowserHistory();
+        // public history = createBrowserHistory();
         this.providers = {};
         this.registeredModules = {};
         this.metaSPALoad = function (config) { return function (module) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+            var registration;
             return tslib_1.__generator(this, function (_a) {
                 MetaSPACore.getInstance().registeredModules[config.namespace] = module;
+                registration = this.registrations.get(config.namespace);
+                registration.onLoad(MetaSPACore.getInstance().registeredModules[config.namespace], this);
                 return [2 /*return*/];
             });
         }); }; };
@@ -55,7 +57,10 @@ var MetaSPACore = /** @class */ (function () {
                     case 2:
                         _a.sent();
                         scriptjs_1.default(module.entry, function () {
-                            module.onLoad(MetaSPACore.getInstance().registeredModules[namespace], _this);
+                            // module.onLoad(
+                            //     MetaSPACore.getInstance().registeredModules[namespace],
+                            //     this,
+                            // );
                         });
                         _a.label = 3;
                     case 3: return [2 /*return*/];
@@ -93,7 +98,7 @@ var MetaSPACore = /** @class */ (function () {
             window.metaSPA = new MetaSPACore();
             window.metaSPALoad = window.metaSPA.metaSPALoad;
             window.metaSPAProvider = window.metaSPA.providers;
-            window.metaSPAHistory = window.metaSPA.history;
+            // window.metaSPAHistory = window.metaSPA.history;
         }
         return window.metaSPA;
     };
@@ -101,7 +106,6 @@ var MetaSPACore = /** @class */ (function () {
 }());
 var metaSPA = MetaSPACore.getInstance();
 exports.metaSPA = metaSPA;
-var history = metaSPA.history;
-exports.history = history;
+// const history = metaSPA.history;
 exports.default = MetaSPACore;
 //# sourceMappingURL=index.js.map

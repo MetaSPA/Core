@@ -1,4 +1,3 @@
-import { History } from "history";
 type IMetaSPAProvider<P extends {
     [x: string]: any;
 }> = {
@@ -25,7 +24,6 @@ declare class MetaSPACore<P extends {
     [x: string]: any;
 }> {
     static getInstance: () => MetaSPACore<any>;
-    history: History<any>;
     providers: IMetaSPAProvider<P>;
     registeredModules: {
         [x: string]: any;
@@ -45,10 +43,8 @@ declare global {
         metaSPA: MetaSPACore<any>;
         metaSPALoad: IMetaSPALoadFunction;
         metaSPAProvider: IMetaSPAProvider<any>;
-        metaSPAHistory: History<any>;
     }
 }
 declare const metaSPA: MetaSPACore<any>;
-declare const history: History<any>;
 export default MetaSPACore;
-export { metaSPA, history };
+export { metaSPA };

@@ -1,6 +1,6 @@
 {
   "name": "@metaspa/core",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -20,14 +20,11 @@
     "@types/scriptjs": "0.0.2",
     "scriptjs": "^2.5.9",
     "tslib": "^1.9.3",
-    "typescript": "^3.1.6",
-    "history": "^4.7.2",
-    "@types/history": "^4.7.2"
+    "typescript": "^3.1.6"
   },
   "peerDependencies": {
+    "@types/scriptjs": "0.0.2",
     "scriptjs": "^2.5.9",
-    "history": "^4.7.2",
-    "@types/history": "^4.7.2",
     "tslib": "^1.9.3"
   },
   "homepage": "https://github.com/MetaSPA/Core#readme",

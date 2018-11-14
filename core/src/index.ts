@@ -1,6 +1,6 @@
 import scriptjs from "scriptjs";
 import * as MetaSPA from "./index";
-import { createBrowserHistory, History } from "history";
+// import { createBrowserHistory, History } from "history";
 
 type IMetaSPAProvider<P extends { [x: string]: any }> = {
     [K in keyof P]?: P[K]
@@ -29,15 +29,17 @@ class MetaSPACore<P extends { [x: string]: any }> {
             window.metaSPA = new MetaSPACore();
             window.metaSPALoad = window.metaSPA.metaSPALoad;
             window.metaSPAProvider = window.metaSPA.providers;
-            window.metaSPAHistory = window.metaSPA.history;
+            // window.metaSPAHistory = window.metaSPA.history;
         }
         return window.metaSPA;
     };
-    public history = createBrowserHistory();
+    // public history = createBrowserHistory();
     public providers: IMetaSPAProvider<P> = {} as IMetaSPAProvider<P>;
     public registeredModules: { [x: string]: any } = {};
     public metaSPALoad: IMetaSPALoadFunction = config => async module => {
         MetaSPACore.getInstance().registeredModules[config.namespace] = module;
+        const registration = this.registrations.get(config.namespace)!;
+        registration.onLoad(MetaSPACore.getInstance().registeredModules[config.namespace], this);
     };
     public registrations = new Map<string, IMetaRegistration<P>>();
     public register<T extends { [x: string]: any }>(
@@ -65,10 +67,10 @@ class MetaSPACore<P extends { [x: string]: any }> {
                 });
                 await Promise.all(promises);
                 scriptjs(module.entry, () => {
-                    module.onLoad(
-                        MetaSPACore.getInstance().registeredModules[namespace],
-                        this,
-                    );
+                    // module.onLoad(
+                    //     MetaSPACore.getInstance().registeredModules[namespace],
+                    //     this,
+                    // );
                 });
             }
         }
@@ -97,11 +99,12 @@ declare global {
         metaSPA: MetaSPACore<any>;
         metaSPALoad: IMetaSPALoadFunction;
         metaSPAProvider: IMetaSPAProvider<any>;
-        metaSPAHistory: History<any>;
+        // metaSPAHistory: History<any>;
     }
 }
 
 const metaSPA = MetaSPACore.getInstance();
-const history = metaSPA.history;
+// const history = metaSPA.history;
 export default MetaSPACore;
-export { metaSPA, history };
+// export { metaSPA, history };
+export { metaSPA };
