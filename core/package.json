@@ -1,14 +1,21 @@
 {
-  "name": "master",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@metaspa/core",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "hlhr202 <hlhr202@163.com> (https://github.com/hlhr202)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MetaSPA/Core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MetaSPA/Core/issues"
+  },
+  "license": "MIT",
   "devDependencies": {
     "@types/scriptjs": "0.0.2",
     "scriptjs": "^2.5.9",
@@ -20,6 +27,10 @@
   "peerDependencies": {
     "scriptjs": "^2.5.9",
     "history": "^4.7.2",
-    "@types/history": "^4.7.2"
-  }
+    "@types/history": "^4.7.2",
+    "tslib": "^1.9.3"
+  },
+  "homepage": "https://github.com/MetaSPA/Core#readme",
+  "dependencies": {},
+  "description": ""
 }
