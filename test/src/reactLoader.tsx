@@ -1,23 +1,36 @@
 import { Component, h } from "preact";
 import { metaSPA } from "../../core/dist";
+import { RouteComponentProps } from "./router";
 
-interface IReactLoaderProps {
+interface IReactLoaderProps extends RouteComponentProps {
     id: string;
 }
 
+const loadManifest = async () => {
+    const result = await fetch("/react/public/manifest.json");
+    const entryMap = await result.json();
+    return Object.entries<string>(entryMap).map<string>(
+        ([key, value]) => value,
+    );
+};
+
 class ReactLoader extends Component<IReactLoaderProps, any> {
     private ref: HTMLDivElement | null = null;
-    componentDidMount() {
+    register = async () => {
+        const entries = await loadManifest();
         metaSPA
             .register({
                 namespace: "TestReact",
-                entries: ["/public/bundle.js"],
+                entries,
                 providers: [
                     { symbol: "React", module: () => import("react" as any) },
-                    { symbol: "ReactDOM", module: () => import("react-dom" as any) },
+                    {
+                        symbol: "ReactDOM",
+                        module: () => import("react-dom" as any),
+                    },
                 ],
                 onLoad: (module, context) => {
-                    const Root = module.default;
+                    const Root = module;
                     const React = context.providers.React;
                     const ReactDOM = context.providers.ReactDOM;
                     ReactDOM.render(React.createElement(Root), this.ref);
@@ -30,9 +43,17 @@ class ReactLoader extends Component<IReactLoaderProps, any> {
                 },
             })
             .loadModule("TestReact");
+    };
+    componentDidMount() {
+        this.register();
     }
     componentWillUnmount() {
         metaSPA.unMountModule("TestReact");
+    }
+    shouldComponentUpdate(prevProps: IReactLoaderProps) {
+        if (this.props.location.pathname === prevProps.location.pathname)
+            return false;
+        return true;
     }
     render() {
         return <div id={this.props.id} ref={div => (this.ref = div)} />;

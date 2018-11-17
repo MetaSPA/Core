@@ -1,0 +1,4 @@
+{
+  "bundle.js": "/react/public/bundle.js",
+  "vendor.js": "/react/public/vendor.js"
+}

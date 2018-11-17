@@ -12,10 +12,10 @@ class App extends Component {
         return (
             <div>
                 <button onClick={() => history.push("/react")}>To React</button>
-                <button onClick={() => history.push("/vue2")}>To Vue</button>
+                <button onClick={() => history.push("/vue")}>To Vue</button>
                 <Router history={history}>
                     <Switch>
-                        <Route path="/vue2" component={VueLoader} />
+                        <Route path="/vue" component={VueLoader} />
                         <Route path="/react" component={ReactLoader} />
                         <Route
                             path="/"

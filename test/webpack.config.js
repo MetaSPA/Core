@@ -85,11 +85,11 @@ module.exports = {
         disableHostCheck: true,
         compress: true,
         proxy: {
-            "/public": {
+            "/react/public": {
                 target: "http://127.0.0.1:8081/",
                 changeOrigin: true,
             },
-            "/vue2public": {
+            "/vue/public": {
                 target: "http://127.0.0.1:8081/",
                 changeOrigin: true,
             }
