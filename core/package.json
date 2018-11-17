@@ -1,6 +1,6 @@
 {
   "name": "@metaspa/core",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -28,6 +28,10 @@
     "tslib": "^1.9.3"
   },
   "homepage": "https://github.com/MetaSPA/Core#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@types/scriptjs": "0.0.2",
+    "scriptjs": "^2.5.9",
+    "tslib": "^1.9.3"
+  },
   "description": ""
 }
