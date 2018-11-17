@@ -9,7 +9,7 @@ class VueLoader extends Component<{}, any> {
             .register({
                 namespace: "TestVue",
                 // entry: "/vuepublic/testvue.common.js",
-                entry: '/vue2public/app.js',
+                entries: ['/vue2public/app.js'],
                 providers: [{ symbol: "Vue", module: () => import("vue") }],
                 onLoad: (module, context) => {
                     const {App, router, store} = module;

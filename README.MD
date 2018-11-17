@@ -1,5 +1,7 @@
 # Meta Single Page Application (WIP)
 
+[![npm](https://img.shields.io/npm/v/@metaspa/core.svg)](https://www.npmjs.com/package/@metaspa/core)
+
 This is a POC for micro frontend. The MetaSPA Core uses a predefined webpack JSONP format to import modules from different independent webpack builds. The most fantastic and magic is that it can import builds in RUN TIME!
 
 In the example, we are using preact/react-router in master SPA (we are using preact for better bundle size). The master SPA will nestedly route a react component and vue component.

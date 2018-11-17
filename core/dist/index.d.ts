@@ -1,15 +1,14 @@
-type IMetaSPAProvider<P extends {
+export interface IDictionaryType {
     [x: string]: any;
-}> = {
+}
+export declare type IMetaSPAProvider<P extends IDictionaryType> = {
     [K in keyof P]?: P[K];
 } & {
     MetaSPA: MetaSPACore<P>;
 };
-interface IMetaRegistration<P extends {
-    [x: string]: any;
-}> {
+export interface IMetaRegistration<P extends IDictionaryType> {
     namespace: string;
-    entry: string;
+    entries: string | string[];
     providers: Array<{
         symbol: keyof IMetaSPAProvider<P>;
         module: () => any;
@@ -17,22 +16,20 @@ interface IMetaRegistration<P extends {
     onLoad: (module: any, context: MetaSPACore<P>) => any;
     unMount: (module: any, context: MetaSPACore<P>) => any;
 }
-type IMetaSPALoadFunction = (config: {
+export declare type IMetaSPALoadFunction = (config: {
     namespace: string;
-}) => (module: any) => Promise<void>;
-declare class MetaSPACore<P extends {
-    [x: string]: any;
-}> {
+    modules: any;
+}) => Promise<void>;
+declare class MetaSPACore<P extends IDictionaryType> {
     static getInstance: () => MetaSPACore<any>;
+    runTime: IDictionaryType;
     providers: IMetaSPAProvider<P>;
-    registeredModules: {
-        [x: string]: any;
-    };
+    registeredModules: IDictionaryType;
     metaSPALoad: IMetaSPALoadFunction;
-    registrations: Map<string, IMetaRegistration<P>>;
-    register<T extends {
-        [x: string]: any;
-    }>(config: IMetaRegistration<T>): this;
+    registrations: {
+        [x: string]: IMetaRegistration<P>;
+    };
+    register<T extends IDictionaryType>(config: IMetaRegistration<T>): this;
     private _loadModuleAsync;
     loadModule(namespace: string): this;
     private _unMountModuleAsync;

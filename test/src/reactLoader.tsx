@@ -11,7 +11,7 @@ class ReactLoader extends Component<IReactLoaderProps, any> {
         metaSPA
             .register({
                 namespace: "TestReact",
-                entry: "/public/bundle.js",
+                entries: ["/public/bundle.js"],
                 providers: [
                     { symbol: "React", module: () => import("react" as any) },
                     { symbol: "ReactDOM", module: () => import("react-dom" as any) },
