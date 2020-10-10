@@ -1,5 +1,11 @@
 # Meta Single Page Application (WIP)
 
+### DEPRECATION NOTICE
+
+Since [Webpack Module Federation](https://webpack.js.org/concepts/module-federation/) has been released, This project will be DEPRECATED
+
+---
+
 [![npm](https://img.shields.io/npm/v/@metaspa/core.svg)](https://www.npmjs.com/package/@metaspa/core)
 
 This is a POC for micro frontend. The MetaSPA Core uses a predefined webpack JSONP format to import modules from different independent webpack builds. The most fantastic and magic is that it can import builds in RUN TIME!
